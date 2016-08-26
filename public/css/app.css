@@ -5785,4 +5785,8 @@ html, body {
   width: 150px;
   max-height: 150px; }
 
+.gallery-actions {
+  margin-top: 15px;
+  text-align: center; }
+
 /*# sourceMappingURL=app.css.map */

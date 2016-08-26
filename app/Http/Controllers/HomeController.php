@@ -8,6 +8,7 @@ use Auth;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Storage;
 
 class HomeController extends Controller
 {
@@ -105,6 +106,12 @@ class HomeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $location = Location::find($id);
+
+        Storage::delete($location->path);
+
+        $location->delete();
+
+        return back();
     }
 }

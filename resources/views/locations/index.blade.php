@@ -11,7 +11,17 @@
                     <div class="row">
                         @foreach($row as $location)
                             <div class="col-sm-4 text-center" style="margin-bottom: 25px;">
-                                <img src="{{ asset($location->path) }}" class="single-photo-gallery">
+                                <div>
+                                    <img src="{{ asset($location->path) }}" class="single-photo-gallery">
+                                </div>
+                                <div class="gallery-actions">
+                                    <form method="POST" action="{{ url('home', [$location->id]) }}">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="submit" class="btn btn-danger" value="delete">
+                                    </form>
+                                    <a href="#" class="btn btn-default"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                </div>
                             </div>
                         @endforeach
                     </div>
