@@ -41,4 +41,10 @@ return [
         'redirect' => 'http://127.0.0.1:8000/auth/google/callback',
     ],
 
+    'twitter' => [
+        'client_id' => getenv('twitter_client_id'),
+        'client_secret' => getenv('twitter_client_secret'),
+        'redirect' => 'http://127.0.0.1:8000/auth/twitter/callback',
+    ],
+
 ];
