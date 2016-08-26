@@ -5766,11 +5766,19 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+html, body {
+  height: 100%; }
+
 .avatar {
   height: 20px;
   width: 20px; }
 
 .single-photo-gallery {
   max-height: 150px; }
+
+#home-map {
+  margin-top: -25px;
+  height: calc(100% - 50px);
+  width: 100%; }
 
 /*# sourceMappingURL=app.css.map */

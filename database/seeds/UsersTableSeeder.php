@@ -29,8 +29,8 @@ class UsersTableSeeder extends Seeder
         for ($i = 0; $i < 200; $i++) {
             $user->locations()->create([
                 'path' => 'asd',
-                'lat' => $faker->randomFloat(8, 90, 100),
-                'lng' => $faker->randomFloat(8, 90, 100),
+                'lat' => $faker->randomFloat(8, 46.655792, 47.721267),
+                'lng' => $faker->randomFloat(8, 6.480414, 10.342801),
                 'disabled' => $faker->boolean
             ]);
         }

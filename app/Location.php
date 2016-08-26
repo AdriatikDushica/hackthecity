@@ -8,6 +8,12 @@ class Location extends Model
 {
     protected $fillable = ['path', 'description', 'lat', 'lng', 'disabled'];
 
+    protected $casts = [
+        'lat' => 'double',
+        'lng' => 'double',
+        'disabled' => 'boolean'
+    ];
+
     public function user()
     {
         return $this->belongsTo('App\User');
