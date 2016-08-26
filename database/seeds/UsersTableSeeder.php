@@ -27,8 +27,11 @@ class UsersTableSeeder extends Seeder
         ]);
 
         for ($i = 0; $i < 200; $i++) {
+            $path = 'locations/' . $faker->md5 . '.jpg';
+            \Storage::copy('demo/'.rand(1,5).'.jpg', $path);
+
             $user->locations()->create([
-                'path' => 'asd',
+                'path' => $path,
                 'lat' => $faker->randomFloat(8, 46.655792, 47.721267),
                 'lng' => $faker->randomFloat(8, 6.480414, 10.342801),
                 'disabled' => $faker->boolean

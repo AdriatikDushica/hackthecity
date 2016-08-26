@@ -21,3 +21,8 @@ Route::get('auth/{provider}/callback', 'ExternalAuthController@handleProviderCal
 Auth::routes();
 
 Route::resource('home', 'HomeController');
+
+Route::get('locations/{location}', function(\App\Location $location)
+{
+    return $location;
+});

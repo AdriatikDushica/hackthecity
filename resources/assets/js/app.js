@@ -14,7 +14,7 @@ $.get('/api/locations', function (locations) {
     locations.forEach(function (location) {
         var marker = L.marker([location.lat, location.lng]);
 
-        marker.bindPopup('location id: ' + location.id);
+        marker.bindPopup('<a href="/locations/'+ location.id +'"><img src="' + location.path + '" class="popup-img"></a>');
 
         markers.addLayer(marker);
     });
