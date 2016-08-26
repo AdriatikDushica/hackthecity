@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('auth/{provider}', 'ExternalAuthController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'ExternalAuthController@handleProviderCallback');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');

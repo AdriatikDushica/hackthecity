@@ -35,4 +35,10 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'google' => [
+        'client_id' => getenv('google_client_id'),
+        'client_secret' => getenv('google_client_secret'),
+        'redirect' => 'http://127.0.0.1:8000/auth/google/callback',
+    ],
+
 ];
