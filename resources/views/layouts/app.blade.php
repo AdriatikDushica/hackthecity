@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -50,7 +51,7 @@
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li class="{{ Request::is('login*') ? 'active' : '' }}"><a href="{{ url('/login') }}">Login</a></li>
-                        <li class="{{ Request::is('register*') ? 'active' : '' }}"><a href="{{ url('/register') }}">Register</a></li>
+                        <li class="{{ Request::is('register*') ? 'active' : '' }}"><a href="{{ url('/register') }}">Registrati</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
