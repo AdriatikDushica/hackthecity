@@ -81,7 +81,7 @@
                 </ul>
 
                 <form class="navbar-form navbar-right">
-                    <button type="submit" class="btn btn-danger"><i class="fa fa-plus-circle" aria-hidden="true"></i> Carica foto</button>
+                    <a href="{{ url('home/create') }}" type="submit" class="btn btn-danger"><i class="fa fa-plus-circle" aria-hidden="true"></i> Carica foto</a>
                 </form>
             </div>
         </div>

@@ -20,4 +20,4 @@ Route::get('auth/{provider}/callback', 'ExternalAuthController@handleProviderCal
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::resource('home', 'HomeController');

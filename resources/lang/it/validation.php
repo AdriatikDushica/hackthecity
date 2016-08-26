@@ -111,7 +111,8 @@ return [
     */
 
     'attributes' => [
-        //
+        'name' => 'nome',
+        'file' => 'immagine'
     ],
 
 ];

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateLocationRequest;
 use App\Location;
+use Auth;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -22,8 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $view = view('home');
-        $view->locations = request()->user()->locations()->paginate(9);
+        $view = view('locations.index');
+        $view->locations = request()->user()->locations()->orderBy('id', 'desc')->paginate(9);
         return $view;
     }
 
@@ -34,7 +36,9 @@ class HomeController extends Controller
      */
     public function create()
     {
-        //
+        $view = view('locations.create');
+
+        return $view;
     }
 
     /**
@@ -43,9 +47,20 @@ class HomeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateLocationRequest $request)
     {
-        //
+        $path = $request->file('file')->store('locations');
+
+        $faker = \Faker\Factory::create('it');
+
+        Auth::user()->locations()->create([
+            'path' => $path,
+            'lat' => $faker->randomFloat(8, 90, 100),
+            'lng' => $faker->randomFloat(8, 90, 100),
+            'disabled' => $request->has('disabled')
+        ]);
+
+        return redirect('/home');
     }
 
     /**
