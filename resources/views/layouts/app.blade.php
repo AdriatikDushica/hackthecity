@@ -53,8 +53,13 @@
                         <li class="{{ Request::is('login*') ? 'active' : '' }}"><a href="{{ url('/login') }}">Login</a></li>
                         <li class="{{ Request::is('register*') ? 'active' : '' }}"><a href="{{ url('/register') }}">Registrati</a></li>
                     @else
+                        <li class="{{ Request::is('home*') ? 'active' : '' }}"><a href="{{ url('/home') }}"><i class="fa fa-picture-o" aria-hidden="true"></i> Le mie foto</a></li>
+                        <li class="{{ Request::is('settings*') ? 'active' : '' }}"><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Impostazioni</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                @if(Auth::user()->avatar)
+                                    <img class="avatar img-circle" src="{{ Auth::user()->avatar }}"  />
+                                @endif
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
 
@@ -74,6 +79,10 @@
                         </li>
                     @endif
                 </ul>
+
+                <form class="navbar-form navbar-right">
+                    <button type="submit" class="btn btn-danger"><i class="fa fa-plus-circle" aria-hidden="true"></i> Carica foto</button>
+                </form>
             </div>
         </div>
     </nav>

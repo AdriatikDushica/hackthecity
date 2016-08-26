@@ -34,6 +34,10 @@ class ExternalAuthController extends Controller
                 $provider => $userInfo->id,
                 'avatar' => $userInfo->avatar
             ]);
+        } else {
+            $user->update([
+                'avatar' => $userInfo->avatar
+            ]);
         }
 
         Auth::login($user);
