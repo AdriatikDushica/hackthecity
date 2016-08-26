@@ -2,15 +2,25 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Le mie foto</div>
 
-                <div class="panel-body">
-                    You are logged in!
+        <div class="panel-body">
+
+            @forelse($locations->chunk(3) as $row)
+                <div class="row">
+                    @foreach($row as $location)
+                        <div class="col-sm-4">
+                            {{ $location }}
+                        </div>
+                    @endforeach
                 </div>
-            </div>
+            @empty
+                <h5 class="text-center">Non sono presenti foto</h5>
+            @endforelse
+
+            <div class="text-center">{!! $locations !!}</div>
+
         </div>
     </div>
 </div>
