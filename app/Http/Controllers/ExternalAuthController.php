@@ -25,7 +25,7 @@ class ExternalAuthController extends Controller
     {
         $userInfo = Socialite::driver($provider)->user();
 
-        $user = User::where($provider, '=', $userInfo->id)->first();
+        $user = User::where($provider, '=', $userInfo->id)->orWhere('email', '=', $userInfo->email)->first();
 
         if(!$user) {
             $user = User::create([
