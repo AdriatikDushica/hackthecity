@@ -50,11 +50,15 @@
                             </div>
                             <div>
                                 @if($location->disabled)
-                                    <i class="fa fa-check text-success" aria-hidden="true"></i>
-                                    <label>accessibile hai disabili</label>
+                                    <div class="text-success">
+                                        <i class="fa fa-wheelchair" aria-hidden="true"></i>
+                                        <label>accessibile ai disabili</label>
+                                    </div>
                                 @else
-                                    <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                                    <label>non accessibile hai disabili</label>
+                                    <div class="text-danger">
+                                        <i class="fa fa-wheelchair" aria-hidden="true"></i>
+                                        <label>non accessibile ai disabili</label>
+                                    </div>
                                 @endif
                             </div>
                         </div>

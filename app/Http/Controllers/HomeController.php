@@ -63,7 +63,7 @@ class HomeController extends Controller
             'lng' => $request->get('lng'),
             'description' => $request->get('description'),
             'type_id' => $request->get('type'),
-            'disabled' => $request->has('disabled')
+            'disabled' => $request->has('disabled') && $request->get('disabled')
         ]);
 
         return redirect('/home');
