@@ -8,19 +8,21 @@
             <div class="panel-heading">
                 Dettagli foto
 
-                <div class="pull-right">
-                    @if(\Auth::user()->likes->where('id', '=', $location->id)->count())
-                        <a href="{{ url('locations/'.$location->id.'/like') }}" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="rimuovi mi piace">
-                            {{ $location->usersLike->count() }}
-                            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                        </a>
-                    @else
-                        <a href="{{ url('locations/'.$location->id.'/like') }}" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="mi piace">
-                            {{ $location->usersLike->count() }}
-                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                        </a>
-                    @endif
-                </div>
+                @if(Auth::check())
+                    <div class="pull-right">
+                        @if(Auth::user()->likes->where('id', '=', $location->id)->count())
+                            <a href="{{ url('locations/'.$location->id.'/like') }}" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="rimuovi mi piace">
+                                {{ $location->usersLike->count() }}
+                                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                            </a>
+                        @else
+                            <a href="{{ url('locations/'.$location->id.'/like') }}" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="mi piace">
+                                {{ $location->usersLike->count() }}
+                                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                            </a>
+                        @endif
+                    </div>
+                @endif
             </div>
 
             <div class="panel-body">
