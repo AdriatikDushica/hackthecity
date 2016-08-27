@@ -28,7 +28,7 @@ class HomeController extends Controller
     {
         $view = view('locations.index');
 
-        $view->locations = request()->user()->locations()->orderBy('id', 'desc')->paginate(9);
+        $view->locations = request()->user()->locations()->whereNotNull('type_id')->orderBy('id', 'desc')->paginate(9);
 
         return $view;
     }

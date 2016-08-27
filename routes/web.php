@@ -22,6 +22,7 @@ Auth::routes();
 
 Route::resource('home', 'HomeController');
 Route::get('create/{location}/next', 'HomeController@createNext');
+
 Route::post('create/{location}/next', 'HomeController@storeNext');
 
 Route::get('locations/{location}', function($id)
@@ -72,7 +73,7 @@ Route::get('more/{id}', function($id)
     $user = \App\User::find($id);
 
     $view->user = $user;
-    $view->locations = \App\Location::where('user_id', '=', $user->id)->paginate(9);
+    $view->locations = \App\Location::where('user_id', '=', $user->id)->whereNotNull('type_id')->paginate(9);
 
     return $view;
 });
@@ -80,7 +81,7 @@ Route::get('more/{id}', function($id)
 Route::get('liked', function(\Illuminate\Http\Request $request)
 {
     $view = view('locations.liked');
-    $view->locations = $request->user()->likes()->paginate(9);
+    $view->locations = $request->user()->likes()->whereNotNull('type_id')->paginate(9);
     return $view;
 });
 

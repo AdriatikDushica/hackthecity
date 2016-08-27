@@ -19,7 +19,7 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/locations', function()
 {
-    return \App\Location::all();
+    return \App\Location::whereNotNull('type_id')->get();
 });
 
 Route::get('/locations/{id}', function($id)
