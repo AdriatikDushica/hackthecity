@@ -73,8 +73,10 @@
                                     <div>
                                         <div>
                                             <a href="#">{{ $comment->user->name }}</a>
-                                            @if(Auth::user()->id==$comment->user_id)
-                                                <a href="{{ url('locations/'.$comment->id.'/delete') }}" class="pull-right" href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                            @if(Auth::check())
+                                                @if(Auth::user()->id==$comment->user_id)
+                                                    <a href="{{ url('locations/'.$comment->id.'/delete') }}" class="pull-right" href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                @endif
                                             @endif
                                         </div>
                                         <p>{{ $comment->text }}</p>
