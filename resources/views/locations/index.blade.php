@@ -17,7 +17,6 @@
                                     </a>
                                 </div>
                                 <div class="gallery-actions">
-                                    <a href="{{ url('home/'.$location->id.'/edit') }}" class="btn btn-default"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                     <form method="POST" action="{{ url('home/'.$location->id) }}" style="display: inline">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="_method" value="DELETE">

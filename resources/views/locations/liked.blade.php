@@ -20,10 +20,12 @@
                         @endforeach
                     </div>
                 @empty
-                    <h4 class="text-center">Non hai ancora messo mi piace a nessuna foto!</h4>
+                    <h4 class="text-center">Non hai ancora messo mi piace a nessuna foto.</h4>
                 @endforelse
 
-                <div class="text-center">{!! $locations !!}</div>
+                @if($locations->count())
+                    <div class="text-center">{!! $locations !!}</div>
+                @endif
 
             </div>
         </div>

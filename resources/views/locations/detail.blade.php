@@ -22,7 +22,7 @@
                             @if($location->user->avatar)
                                 <img class="img-circle" src="{{ $location->user->avatar }}">
                             @endif
-                            <a href="{{ url('more', [$location->user->id]) }}">{{ $location->user->name }}</a>
+                            <a href="{{ url('more/'.$location->user->id) }}">{{ $location->user->name }}</a>
 
                             @if(Auth::check())
                                 <div class="pull-right">
@@ -72,7 +72,7 @@
                                 @forelse($location->comments as $comment)
                                     <div>
                                         <div>
-                                            <a href="#">{{ $comment->user->name }}</a>
+                                            <a href="{{ url('more/'.$comment->user_id) }}">{{ $comment->user->name }}</a>
                                             @if(Auth::check())
                                                 @if(Auth::user()->id==$comment->user_id)
                                                     <a href="{{ url('locations/'.$comment->id.'/delete') }}" class="pull-right" href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
