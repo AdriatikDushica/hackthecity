@@ -5,6 +5,10 @@ require('bootstrap-sass');
 
 var uri = window.location.pathname;
 var detailLocationUriRegEx = /\/locations\/(\d+)/;
+var createNextUriRegEx = /\/create\/(\d+)\/next/;
+
+var provider = 'https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWRyaWF0aWsiLCJhIjoiY2lzYWc2Mng5MDAybTJ1cDVwZGM3ZXJoNSJ9.vmdtEOIgkBcOea1aUCb3Xg';
+// var provider = 'http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png';
 
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
@@ -14,7 +18,7 @@ if(uri=='/') {
     var map = L.map('home-map').setView([46.7818348,8.2925331], 8);
     var markers = L.markerClusterGroup();
 
-    L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+    L.tileLayer(provider, {
         maxZoom: 18
     }).addTo(map);
 
@@ -44,17 +48,33 @@ if(uri=='/') {
     $.get('/api/locations/' + locationId, function (location) {
         var map = L.map('map-detail').setView([location.lat, location.lng], 15);
 
-        L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+        L.tileLayer(provider, {
             maxZoom: 18
         }).addTo(map);
 
         L.marker([location.lat, location.lng]).addTo(map);
     });
-} else if(uri=='/home/create') {
-    var map = L.map('map-create').setView([46.7818348,8.2925331], 7);
+} else if(createNextUriRegEx.test(uri)) {
+    var coordinates = null;
+    var coordinatesOk = $('#lat').val().length && $('#lng').val().length;
+    var zoom = 7;
+
     var marker = null;
 
-    L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+    if(coordinatesOk) {
+        coordinates = [$('#lat').val(), $('#lng').val()];
+        marker = L.marker(coordinates, {draggable: true});
+        zoom = 12;
+    } else {
+        coordinates = [46.7818348, 8.2925331];
+    }
+
+    var map = L.map('map-create').setView(coordinates, zoom);
+
+    if(marker)
+        marker.addTo(map);
+
+    L.tileLayer(provider, {
         maxZoom: 18
     }).addTo(map);
 

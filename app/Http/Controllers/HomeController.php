@@ -40,11 +40,7 @@ class HomeController extends Controller
      */
     public function create()
     {
-        $view = view('locations.create');
-
-        $view->types = Type::all();
-
-        return $view;
+        return view('locations.create');
     }
 
     /**
@@ -57,16 +53,42 @@ class HomeController extends Controller
     {
         $path = $request->file('file')->store('locations');
 
-        Auth::user()->locations()->create([
+        $reader = \PHPExif\Reader\Reader::factory(\PHPExif\Reader\Reader::TYPE_NATIVE);
+
+        $exif = $reader->read(storage_path('app/' . $path));
+
+        $location = Auth::user()->locations()->create([
             'path' => $path,
-            'lat' => $request->get('lat'),
-            'lng' => $request->get('lng'),
-            'description' => $request->get('description'),
-            'type_id' => $request->get('type'),
-            'disabled' => $request->has('disabled') && $request->get('disabled')
+            'lat' => ($exif && $exif->getGPS()) ? explode(',', $exif->getGPS())[0] : null,
+            'lng' => ($exif && $exif->getGPS()) ? explode(',', $exif->getGPS())[1] : null
         ]);
 
-        return redirect('/home');
+        return redirect('/create/'.$location->id.'/next');
+    }
+
+    public function createNext(Location $location)
+    {
+        $view = view('locations.create-next');
+
+        $view->types = Type::all();
+        $view->location = $location;
+
+        return $view;
+    }
+
+    public function storeNext($id, Requests\CreateNextLocationRequest $request)
+    {
+        $location = Location::find($id);
+
+        $location->update([
+            'description' => $request->get('description'),
+            'type_id' => $request->get('type'),
+            'lat' => $request->get('lat'),
+            'lng' => $request->get('lng'),
+            'disabled' => $request->get('disabled')
+        ]);
+
+        return redirect('home');
     }
 
     /**

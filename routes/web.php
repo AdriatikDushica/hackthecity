@@ -21,6 +21,8 @@ Route::get('auth/{provider}/callback', 'ExternalAuthController@handleProviderCal
 Auth::routes();
 
 Route::resource('home', 'HomeController');
+Route::get('create/{location}/next', 'HomeController@createNext');
+Route::post('create/{location}/next', 'HomeController@storeNext');
 
 Route::get('locations/{location}', function($id)
 {
@@ -80,4 +82,15 @@ Route::get('liked', function(\Illuminate\Http\Request $request)
     $view = view('locations.liked');
     $view->locations = $request->user()->likes()->paginate(9);
     return $view;
+});
+
+Route::get('ex', function(\Illuminate\Http\Request $request)
+{
+    $filePath = storage_path('app/demo/test.JPG');
+
+    $reader = \PHPExif\Reader\Reader::factory(\PHPExif\Reader\Reader::TYPE_NATIVE);
+
+    $exif = $reader->read($filePath);
+
+    return $exif->getGPS() ? $exif->getGPS() : ['latitute'=>null, 'longitude'=>null];
 });

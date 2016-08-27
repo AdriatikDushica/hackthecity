@@ -26,3 +26,8 @@ Route::get('/locations/{id}', function($id)
 {
     return \App\Location::with('user')->where('id', '=', $id)->first();
 });
+
+Route::post('location/image', function()
+{
+    return 'ok';
+});

@@ -17,10 +17,10 @@ class CreateLocationsTable extends Migration
             $table->increments('id');
             $table->string('path');
             $table->text('description')->nullable();
-            $table->double('lat');
-            $table->double('lng');
-            $table->boolean('disabled');
-            $table->integer('type_id')->unsigned();
+            $table->double('lat')->nullable();
+            $table->double('lng')->nullable();
+            $table->boolean('disabled')->nullable();
+            $table->integer('type_id')->unsigned()->nullable();
             $table->foreign('type_id')->references('id')->on('types');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('types');
