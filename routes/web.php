@@ -45,7 +45,7 @@ Route::get('locations/{location}/like', function(\App\Location $location, \Illum
     return back();
 });
 
-Route::post('locations/{location}/comment', function($id, \Illuminate\Http\Request $request)
+Route::post('locations/{location}/comment', function($id, \App\Http\Requests\CreateCommentRequest $request)
 {
     \App\Comment::create([
         'text' => $request->get('text'),
