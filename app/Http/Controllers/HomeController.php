@@ -88,7 +88,13 @@ class HomeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $view = view('locations.edit');
+
+        $view->location = \App\Location::with('user')->where('id', '=', $id)->first();
+
+        $view->types = \App\Type::all();
+
+        return $view;
     }
 
     /**
@@ -100,7 +106,7 @@ class HomeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd('updating...');
     }
 
     /**
