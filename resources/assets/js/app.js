@@ -60,7 +60,7 @@ if(uri=='/') {
 
     map.on('click', function (event) {
         if(!marker) {
-            marker = L.marker(event.latlng).addTo(map);
+            marker = L.marker(event.latlng, {draggable: true}).addTo(map);
         } else {
             marker.setLatLng(event.latlng);
             map.setView(event.latlng);
