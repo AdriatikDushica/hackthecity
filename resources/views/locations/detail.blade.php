@@ -13,11 +13,11 @@
 
                 <div class="row">
 
-                    <div class="col-xs-7">
+                    <div class="col-sm-7">
                         <img src="{{ asset($location->path) }}" class="img-responsive"/>
                     </div>
 
-                    <div class="col-xs-5">
+                    <div class="col-sm-5">
                         <div style="margin-top: 10px;">
                             @if($location->user->avatar)
                                 <img class="img-circle" src="{{ $location->user->avatar }}">

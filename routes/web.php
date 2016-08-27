@@ -65,12 +65,19 @@ Route::get('locations/{comment}/delete', function($id)
 
 Route::get('more/{id}', function($id)
 {
-    return \App\User::find($id)->locations;
+    $view = view('more');
+
+    $user = \App\User::find($id);
+
+    $view->user = $user;
+    $view->locations = \App\Location::where('user_id', '=', $user->id)->paginate(9);
+
+    return $view;
 });
 
 Route::get('liked', function(\Illuminate\Http\Request $request)
 {
     $view = view('locations.liked');
-    $view->locations = $request->user()->likes()->paginate(10);
+    $view->locations = $request->user()->likes()->paginate(9);
     return $view;
 });
