@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="panel panel-default">
-            <div class="panel-heading">Le mie foto</div>
+            <div class="panel-heading">Foto piaciute</div>
 
             <div class="panel-body">
 
@@ -16,19 +16,11 @@
                                         <img src="{{ asset($location->path) }}" class="single-photo-gallery">
                                     </a>
                                 </div>
-                                <div class="gallery-actions">
-                                    <a href="#" class="btn btn-default"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                    <form method="POST" action="{{ url('home', [$location->id]) }}" id="delete-foto-form" style="display: inline">
-                                        {{ csrf_field() }}
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <button class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete-foto-form').submit();"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                    </form>
-                                </div>
                             </div>
                         @endforeach
                     </div>
                 @empty
-                    <h4 class="text-center">Non sono presenti foto</h4>
+                    <h4 class="text-center">Non hai ancora messo mi piace a nessuna foto!</h4>
                 @endforelse
 
                 <div class="text-center">{!! $locations !!}</div>

@@ -49,3 +49,10 @@ Route::get('more/{id}', function($id)
 {
     return \App\User::find($id)->locations;
 });
+
+Route::get('liked', function(\Illuminate\Http\Request $request)
+{
+    $view = view('locations.liked');
+    $view->locations = $request->user()->likes()->paginate(10);
+    return $view;
+});
