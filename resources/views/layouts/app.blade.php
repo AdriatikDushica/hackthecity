@@ -57,6 +57,7 @@
                         <li class="{{ Request::is('register*') ? 'active' : '' }}"><a href="{{ url('/register') }}">Registrati</a></li>
                     @else
                         <li class="{{ Request::is('home*') ? 'active' : '' }}"><a href="{{ url('/home') }}"><i class="fa fa-picture-o" aria-hidden="true"></i> Le mie foto</a></li>
+                        <li class="{{ Request::is('liked*') ? 'active' : '' }}"><a href="{{ url('/liked') }}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Foto piaciute</a></li>
                         <li class="{{ Request::is('settings*') ? 'active' : '' }}"><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Impostazioni</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

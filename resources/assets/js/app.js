@@ -44,6 +44,24 @@ if(uri=='/') {
             maxZoom: 18
         }).addTo(map);
 
-        var marker = L.marker([location.lat, location.lng]).addTo(map);
+        L.marker([location.lat, location.lng]).addTo(map);
+    });
+} else if(uri=='/home/create') {
+    var map = L.map('map-create').setView([46.7818348,8.2925331], 7);
+    var marker = null;
+
+    L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+        maxZoom: 18
+    }).addTo(map);
+
+    map.on('click', function (event) {
+        if(!marker) {
+            marker = L.marker(event.latlng).addTo(map);
+        } else {
+            marker.setLatLng(event.latlng);
+            map.setView(event.latlng);
+        }
+        $('#lat').val(event.latlng.lat);
+        $('#lng').val(event.latlng.lng);
     });
 }

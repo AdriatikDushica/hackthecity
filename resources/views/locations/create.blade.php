@@ -60,6 +60,14 @@
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" name="lat" id="lat">
+                    <input type="hidden" name="lng" id="lng">
+                    <div class="form-group{{ $errors->has('lat') || $errors->has('lng') ? ' has-error' : '' }}">
+                        <label class="col-sm-2 control-label">Luogo in cui è stata scattata la foto</label>
+                        <div class="col-sm-10">
+                            <div id="map-create"></div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-primary">Carica</button>

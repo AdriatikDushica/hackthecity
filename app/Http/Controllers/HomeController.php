@@ -57,12 +57,10 @@ class HomeController extends Controller
     {
         $path = $request->file('file')->store('locations');
 
-        $faker = \Faker\Factory::create('it');
-
         Auth::user()->locations()->create([
             'path' => $path,
-            'lat' => $faker->randomFloat(8, 90, 100),
-            'lng' => $faker->randomFloat(8, 90, 100),
+            'lat' => $request->get('lat'),
+            'lng' => $request->get('lng'),
             'description' => $request->get('description'),
             'type_id' => $request->get('type'),
             'disabled' => $request->has('disabled')

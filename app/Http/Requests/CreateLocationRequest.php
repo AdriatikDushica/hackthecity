@@ -25,7 +25,9 @@ class CreateLocationRequest extends FormRequest
     {
         return [
             'file' => 'required|image',
-            'type' => 'required|integer'
+            'type' => 'required|integer',
+            'lat' => 'required|numeric',
+            'lng' => 'required|numeric'
         ];
     }
 }
