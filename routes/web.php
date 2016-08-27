@@ -26,7 +26,7 @@ Route::get('locations/{location}', function($id)
 {
     $view = view('locations.detail');
 
-    $view->location = \App\Location::with('usersLike')->where('id', '=', $id)->first();
+    $view->location = \App\Location::with('usersLike', 'comments')->where('id', '=', $id)->first();
 
     return $view;
 });
@@ -35,6 +35,7 @@ Route::get('locations/{location}/like', function(\App\Location $location, \Illum
 {
 
     $likes = \Auth::user()->likes->where('id', '=', $location->id);
+
     if($likes->count()) {
         $request->user()->likes()->detach($likes);
     } else {
@@ -44,6 +45,23 @@ Route::get('locations/{location}/like', function(\App\Location $location, \Illum
     return back();
 });
 
+Route::post('locations/{location}/comment', function($id, \Illuminate\Http\Request $request)
+{
+    \App\Comment::create([
+        'text' => $request->get('text'),
+        'user_id' => $request->user()->id,
+        'location_id' => $id
+    ]);
+
+    return back();
+});
+
+Route::get('locations/{comment}/delete', function($id)
+{
+    \App\Comment::find($id)->delete();
+
+    return back()->with('success', 'Commento eliminato con successo');
+});
 
 Route::get('more/{id}', function($id)
 {

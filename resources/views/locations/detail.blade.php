@@ -67,6 +67,31 @@
                                     </div>
                                 @endif
                             </div>
+                            <div style="background-color: #e8e8e8; padding: 10px;">
+                                <label>Commenti:</label>
+                                @forelse($location->comments as $comment)
+                                    <div>
+                                        <div>
+                                            <a href="#">{{ $comment->user->name }}</a>
+                                            @if(Auth::user()->id==$comment->user_id)
+                                                <a href="{{ url('locations/'.$comment->id.'/delete') }}" class="pull-right" href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                            @endif
+                                        </div>
+                                        <p>{{ $comment->text }}</p>
+                                    </div>
+                                @empty
+                                    <p>Non sono presenti commenti</p>
+                                @endif
+                                <form action="{{ url('locations/'.$location->id.'/comment') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Inserisci il tuo commento...." name="text" autocomplete="off">
+                                        <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit">Commenta!</button>
+                                    </span>
+                                    </div><!-- /input-group -->
+                                </form>
+                            </div>
                         </div>
 
                     </div>
