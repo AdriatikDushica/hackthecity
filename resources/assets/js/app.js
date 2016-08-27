@@ -3,29 +3,47 @@ window._ = require('lodash');
 window.$ = window.jQuery = require('jquery');
 require('bootstrap-sass');
 
-var map = L.map('home-map').setView([46.7818348,8.2925331], 8);
-var markers = L.markerClusterGroup();
+var uri = window.location.pathname;
+var detailLocationUriRegEx = /\/locations\/(\d+)/;
 
-L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
-    maxZoom: 18
-}).addTo(map);
+if(uri=='/') {
+    var map = L.map('home-map').setView([46.7818348,8.2925331], 8);
+    var markers = L.markerClusterGroup();
 
-$.get('/api/locations', function (locations) {
-    locations.forEach(function (location) {
-        var marker = L.marker([location.lat, location.lng]);
+    L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+        maxZoom: 18
+    }).addTo(map);
 
-        marker.bindPopup('<a href="/locations/'+ location.id +'"><img src="' + location.path + '" class="popup-img"></a>');
+    $.get('/api/locations', function (locations) {
+        locations.forEach(function (location) {
+            var marker = L.marker([location.lat, location.lng]);
 
-        markers.addLayer(marker);
+            marker.bindPopup('<a href="/locations/'+ location.id +'"><img src="' + location.path + '" class="popup-img"></a>');
+
+            markers.addLayer(marker);
+        });
     });
-});
 
-markers.on('click', function (event) {
-    map.setView(event.latlng);
-});
+    markers.on('click', function (event) {
+        map.setView(event.latlng);
+    });
 
-markers.on('clusterclick', function (event) {
-    console.log('cluster click');
-});
+    markers.on('clusterclick', function (event) {
+        console.log('cluster click');
+    });
 
-map.addLayer(markers);
+    map.addLayer(markers);
+} else if(detailLocationUriRegEx.test(uri)) {
+    var match = detailLocationUriRegEx.exec(uri);
+    var locationId =  match[1];
+
+    $.get('/api/locations/' + locationId, function (location) {
+        var map = L.map('map-detail').setView([location.lat, location.lng], 15);
+
+        L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+            maxZoom: 18
+        }).addTo(map);
+
+        var marker = L.marker([location.lat, location.lng]).addTo(map);
+    });
+}

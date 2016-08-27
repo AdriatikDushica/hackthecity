@@ -21,3 +21,8 @@ Route::get('/locations', function()
 {
     return \App\Location::all();
 });
+
+Route::get('/locations/{id}', function($id)
+{
+    return \App\Location::with('user')->where('id', '=', $id)->first();
+});

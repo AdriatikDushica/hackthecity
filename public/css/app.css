@@ -5789,4 +5789,8 @@ html, body {
   margin-top: 15px;
   text-align: center; }
 
+#map-detail {
+  width: 100%;
+  height: 400px; }
+
 /*# sourceMappingURL=app.css.map */

@@ -112,7 +112,8 @@ return [
 
     'attributes' => [
         'name' => 'nome',
-        'file' => 'immagine'
+        'file' => 'immagine',
+        'type' => 'tipologia'
     ],
 
 ];

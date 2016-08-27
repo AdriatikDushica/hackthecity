@@ -16,12 +16,14 @@ class CreateLocationsTable extends Migration
         Schema::create('locations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('path');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->double('lat');
             $table->double('lng');
             $table->boolean('disabled');
+            $table->integer('type_id')->unsigned();
+            $table->foreign('type_id')->references('id')->on('types');
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('types');
             $table->timestamps();
         });
     }

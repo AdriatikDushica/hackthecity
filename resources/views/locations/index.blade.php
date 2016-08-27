@@ -12,15 +12,16 @@
                         @foreach($row as $location)
                             <div class="col-sm-4 text-center" style="margin-bottom: 25px;">
                                 <div>
-                                    <img src="{{ asset($location->path) }}" class="single-photo-gallery">
+                                    <a href="{{ url('locations', [$location->id]) }}">
+                                        <img src="{{ asset($location->path) }}" class="single-photo-gallery">
+                                    </a>
                                 </div>
                                 <div class="gallery-actions">
-                                    <form method="POST" action="{{ url('home', [$location->id]) }}">
+                                    <form method="POST" action="{{ url('home', [$location->id]) }}" id="delete-foto-form">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="_method" value="DELETE">
-                                        <input type="submit" class="btn btn-danger" value="delete">
+                                        <button class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete-foto-form').submit();"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     </form>
-                                    <a href="#" class="btn btn-default"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         @endforeach

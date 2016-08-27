@@ -24,7 +24,8 @@ class CreateLocationRequest extends FormRequest
     public function rules()
     {
         return [
-            'file' => 'required|image'
+            'file' => 'required|image',
+            'type' => 'required|integer'
         ];
     }
 }

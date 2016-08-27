@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Location extends Model
 {
-    protected $fillable = ['path', 'description', 'lat', 'lng', 'disabled'];
+    protected $fillable = ['path', 'description', 'type_id', 'lat', 'lng', 'disabled'];
 
     protected $casts = [
         'lat' => 'double',
@@ -17,5 +17,10 @@ class Location extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function type()
+    {
+        return $this->belongsTo('\App\Type');
     }
 }

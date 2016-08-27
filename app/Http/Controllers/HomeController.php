@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateLocationRequest;
 use App\Location;
+use App\Type;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,9 @@ class HomeController extends Controller
     public function index()
     {
         $view = view('locations.index');
+
         $view->locations = request()->user()->locations()->orderBy('id', 'desc')->paginate(9);
+
         return $view;
     }
 
@@ -38,6 +41,8 @@ class HomeController extends Controller
     public function create()
     {
         $view = view('locations.create');
+
+        $view->types = Type::all();
 
         return $view;
     }
@@ -58,6 +63,8 @@ class HomeController extends Controller
             'path' => $path,
             'lat' => $faker->randomFloat(8, 90, 100),
             'lng' => $faker->randomFloat(8, 90, 100),
+            'description' => $request->get('description'),
+            'type_id' => $request->get('type'),
             'disabled' => $request->has('disabled')
         ]);
 
@@ -112,6 +119,6 @@ class HomeController extends Controller
 
         $location->delete();
 
-        return back();
+        return back()->with('success', 'Foto eliminata con successo');
     }
 }

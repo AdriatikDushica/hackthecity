@@ -24,5 +24,12 @@ Route::resource('home', 'HomeController');
 
 Route::get('locations/{location}', function(\App\Location $location)
 {
-    return $location;
+    $view = view('locations.detail');
+    $view->location = $location;
+    return $view;
+});
+
+Route::get('more/{id}', function($id)
+{
+    return \App\User::find($id)->locations;
 });

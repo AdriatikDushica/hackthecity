@@ -90,6 +90,10 @@
         </div>
     </nav>
 
+    <div class="container">
+        @include('partials.info')
+    </div>
+
     @yield('content')
 
     <!-- Scripts -->
