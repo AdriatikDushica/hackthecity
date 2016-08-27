@@ -13,7 +13,7 @@
                             <div class="col-sm-4 text-center" style="margin-bottom: 25px;">
                                 <div>
                                     <a href="{{ url('locations', [$location->id]) }}">
-                                        <img src="{{ asset($location->path) }}" class="single-photo-gallery">
+                                        <img src="{{ asset($location->path) }}" class="single-photo-gallery img-thumbnail">
                                     </a>
                                 </div>
                             </div>
