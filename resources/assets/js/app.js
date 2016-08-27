@@ -6,6 +6,10 @@ require('bootstrap-sass');
 var uri = window.location.pathname;
 var detailLocationUriRegEx = /\/locations\/(\d+)/;
 
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+});
+
 if(uri=='/') {
     var map = L.map('home-map').setView([46.7818348,8.2925331], 8);
     var markers = L.markerClusterGroup();

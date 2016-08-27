@@ -9,14 +9,17 @@
                 Dettagli foto
 
                 <div class="pull-right">
-                    <b>{{ $location->usersLike->count() }}</b> mi piace
-                    <a href="{{ url('locations/'.$location->id.'/like') }}" class="btn btn-default btn-xs">
-                        @if(\Auth::user()->likes->where('id', '=', $location->id)->count())
-                            rimuovi mi piace
-                        @else
-                            Mi piace
-                        @endif
-                    </a>
+                    @if(\Auth::user()->likes->where('id', '=', $location->id)->count())
+                        <a href="{{ url('locations/'.$location->id.'/like') }}" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="rimuovi mi piace">
+                            {{ $location->usersLike->count() }}
+                            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                        </a>
+                    @else
+                        <a href="{{ url('locations/'.$location->id.'/like') }}" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="mi piace">
+                            {{ $location->usersLike->count() }}
+                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                        </a>
+                    @endif
                 </div>
             </div>
 
