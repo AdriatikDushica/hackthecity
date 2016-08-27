@@ -22,12 +22,28 @@ Auth::routes();
 
 Route::resource('home', 'HomeController');
 
-Route::get('locations/{location}', function(\App\Location $location)
+Route::get('locations/{location}', function($id)
 {
     $view = view('locations.detail');
-    $view->location = $location;
+
+    $view->location = \App\Location::with('usersLike')->where('id', '=', $id)->first();
+
     return $view;
 });
+
+Route::get('locations/{location}/like', function(\App\Location $location, \Illuminate\Http\Request $request)
+{
+
+    $likes = \Auth::user()->likes->where('id', '=', $location->id);
+    if($likes->count()) {
+        $request->user()->likes()->detach($likes);
+    } else {
+        $request->user()->likes()->attach($location);
+    }
+
+    return back();
+});
+
 
 Route::get('more/{id}', function($id)
 {

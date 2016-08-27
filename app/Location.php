@@ -23,4 +23,9 @@ class Location extends Model
     {
         return $this->belongsTo('\App\Type');
     }
+
+    public function usersLike()
+    {
+        return $this->belongsToMany('\App\User');
+    }
 }

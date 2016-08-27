@@ -8,7 +8,16 @@
             <div class="panel-heading">
                 Dettagli foto
 
-                <div class="pull-right"><b>0</b> mi piace</div>
+                <div class="pull-right">
+                    <b>{{ $location->usersLike->count() }}</b> mi piace
+                    <a href="{{ url('locations/'.$location->id.'/like') }}" class="btn btn-default btn-xs">
+                        @if(\Auth::user()->likes->where('id', '=', $location->id)->count())
+                            rimuovi mi piace
+                        @else
+                            Mi piace
+                        @endif
+                    </a>
+                </div>
             </div>
 
             <div class="panel-body">

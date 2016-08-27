@@ -31,4 +31,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Location');
     }
+
+    public function likes()
+    {
+        return $this->belongsToMany('\App\Location');
+    }
 }

@@ -17,7 +17,8 @@
                                     </a>
                                 </div>
                                 <div class="gallery-actions">
-                                    <form method="POST" action="{{ url('home', [$location->id]) }}" id="delete-foto-form">
+                                    <a href="#" class="btn btn-default"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                    <form method="POST" action="{{ url('home', [$location->id]) }}" id="delete-foto-form" style="display: inline">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="_method" value="DELETE">
                                         <button class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete-foto-form').submit();"><i class="fa fa-trash" aria-hidden="true"></i></button>
