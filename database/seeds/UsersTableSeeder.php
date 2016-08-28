@@ -29,10 +29,10 @@ class UsersTableSeeder extends Seeder
 
         for ($i = 0; $i < 250; $i++) {
 
-            $lat = $faker->randomFloat(8, 46.655792, 47.721267);
+            $lat = $faker->randomFloat(8, 46.255792, 47.421267);
             $lng = $faker->randomFloat(8, 6.480414, 10.342801);
 
-            for ($x = 0; $x < rand(0, 4); $x++) {
+            for ($x = 0; $x < rand(2, 4); $x++) {
                 $path = 'locations/' . $faker->md5 . '.jpg';
                 \Storage::copy('demo/'.rand(1,5).'.jpg', $path);
                 $user->locations()->create([
