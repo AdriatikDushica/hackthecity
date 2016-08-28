@@ -85,15 +85,17 @@
                                 @empty
                                     <p>Non sono presenti commenti</p>
                                 @endif
-                                <form action="{{ url('locations/'.$location->id.'/comment') }}" method="POST">
-                                    {{ csrf_field() }}
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Inserisci il tuo commento...." name="text" autocomplete="off">
-                                        <span class="input-group-btn">
-                                        <button class="btn btn-default" type="submit">Commenta!</button>
-                                    </span>
-                                    </div><!-- /input-group -->
-                                </form>
+                                @if(Auth::check())
+                                    <form action="{{ url('locations/'.$location->id.'/comment') }}" method="POST">
+                                        {{ csrf_field() }}
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Inserisci il tuo commento...." name="text" autocomplete="off">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" type="submit">Commenta!</button>
+                                            </span>
+                                        </div><!-- /input-group -->
+                                    </form>
+                                @endif
                             </div>
                         </div>
 
