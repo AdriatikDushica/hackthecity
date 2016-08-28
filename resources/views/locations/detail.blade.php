@@ -24,8 +24,8 @@
                             @endif
                             <a href="{{ url('more/'.$location->user->id) }}">{{ $location->user->name }}</a>
 
-                            @if(Auth::check())
-                                <div class="pull-right">
+                            <div class="pull-right">
+                                @if(Auth::check())
                                     @if(Auth::user()->likes->where('id', '=', $location->id)->count())
                                         <a href="{{ url('locations/'.$location->id.'/like') }}" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="rimuovi mi piace">
                                             {{ $location->usersLike->count() }}
@@ -37,8 +37,9 @@
                                             <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
                                         </a>
                                     @endif
-                                </div>
-                            @endif
+                                @endif
+                                <a href="https://maps.google.com?saddr=Current+Location&daddr={{ $location->lat }},{{ $location->lng }}" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="indicazioni stradali"><i class="fa fa-car" aria-hidden="true"></i></a>
+                            </div>
                         </div>
 
                         <hr>
