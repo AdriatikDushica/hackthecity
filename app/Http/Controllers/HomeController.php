@@ -13,12 +13,6 @@ use Storage;
 
 class HomeController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -146,5 +140,61 @@ class HomeController extends Controller
         $location->delete();
 
         return back()->with('success', 'Foto eliminata con successo');
+    }
+
+    public function detail($id)
+    {
+        return view('locations.detail')->with('location', \App\Location::with('usersLike', 'comments')->where('id', '=', $id)->first());
+    }
+
+    public function like(\App\Location $location, \Illuminate\Http\Request $request)
+    {
+
+        $likes = \Auth::user()->likes->where('id', '=', $location->id);
+
+        if($likes->count()) {
+            $request->user()->likes()->detach($likes);
+        } else {
+            $request->user()->likes()->attach($location);
+        }
+
+        return back();
+    }
+
+    public function comment($id, \App\Http\Requests\CreateCommentRequest $request)
+    {
+        \App\Comment::create([
+            'text' => $request->get('text'),
+            'user_id' => $request->user()->id,
+            'location_id' => $id
+        ]);
+
+        return back();
+    }
+
+    public function deleteComment($id)
+    {
+        \App\Comment::find($id)->delete();
+
+        return back()->with('success', 'Commento eliminato con successo');
+    }
+
+    public function more($id)
+    {
+        $view = view('more');
+
+        $user = \App\User::find($id);
+
+        $view->user = $user;
+        $view->locations = \App\Location::where('user_id', '=', $user->id)->whereNotNull('type_id')->paginate(9);
+
+        return $view;
+    }
+
+    public function liked(\Illuminate\Http\Request $request)
+    {
+        $view = view('locations.liked');
+        $view->locations = $request->user()->likes()->whereNotNull('type_id')->paginate(9);
+        return $view;
     }
 }
