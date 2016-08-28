@@ -68,7 +68,7 @@
                                     </div>
                                 @endif
                             </div>
-                            <div style="background-color: #e8e8e8; padding: 10px;">
+                            <div style="background-color: #e8e8e8; padding: 10px; margin-top: 10px;">
                                 <label>Commenti:</label>
                                 @forelse($location->comments as $comment)
                                     <div>
