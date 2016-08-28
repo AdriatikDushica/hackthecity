@@ -22,3 +22,11 @@ Route::post('locations/{location}/comment', 'HomeController@comment');
 Route::get('locations/{comment}/delete', 'HomeController@deleteComment');
 Route::get('more/{id}', 'HomeController@more');
 Route::get('liked', 'HomeController@liked');
+
+Route::get('/notifications/read', function()
+{
+    foreach(request()->user()->notifications as $notification)
+        $notification->delete();
+
+    return ['status' => 'ok'];
+});

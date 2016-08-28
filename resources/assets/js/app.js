@@ -54,6 +54,12 @@ if(uri=='/') {
 
         L.marker([location.lat, location.lng]).addTo(map);
     });
+
+    $('#notifications-tab').click(function () {
+        $.get('/notifications/read', function (result) {
+            $('#badge').html('0');
+        });
+    });
 } else if(createNextUriRegEx.test(uri)) {
     var coordinates = null;
     var coordinatesOk = $('#lat').val().length && $('#lng').val().length;

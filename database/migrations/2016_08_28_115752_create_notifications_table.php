@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLocationsTable extends Migration
+class CreateNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,21 @@ class CreateLocationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('locations', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('path');
-            $table->text('description')->nullable();
-            $table->double('lat')->nullable();
-            $table->double('lng')->nullable();
-            $table->boolean('disabled')->nullable();
-            $table->integer('type_id')->unsigned()->nullable();
-            $table->foreign('type_id')->references('id')->on('types');
+
+            $table->boolean('notified');
+            $table->string('type');
+
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+
+            $table->integer('from_user_id')->unsigned();
+            $table->foreign('from_user_id')->references('id')->on('users');
+
+            $table->integer('location_id')->unsigned();
+            $table->foreign('location_id')->references('id')->on('locations');
+
             $table->timestamps();
         });
     }
@@ -35,6 +39,6 @@ class CreateLocationsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('locations');
+        Schema::drop('notifications');
     }
 }

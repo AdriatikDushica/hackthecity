@@ -5797,4 +5797,7 @@ html, body {
   width: 100%;
   height: 400px; }
 
+.notification-row {
+  margin: 0px 10px; }
+
 /*# sourceMappingURL=app.css.map */

@@ -60,6 +60,24 @@
                     @else
                         <li class="{{ Request::is('home*') ? 'active' : '' }}"><a href="{{ url('/home') }}"><i class="fa fa-picture-o" aria-hidden="true"></i> Le mie foto</a></li>
                         <li class="{{ Request::is('liked*') ? 'active' : '' }}"><a href="{{ url('/liked') }}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Foto piaciute</a></li>
+                        <li class="dropdown" id="notifications-tab">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i> <span class="badge" id="badge">{{ Auth::user()->notifications->count() }}</span></a>
+                            <ul class="dropdown-menu" style="width: 200px;">
+                                @forelse(Auth::user()->notifications as $notification)
+                                    @if($notification->type=='like')
+                                        <li class="notification-row" style="white-space: normal;">
+                                            <a style="white-space: normal;" href="{{ url('locations/'.$notification->location->id) }}">L'utente {{ $notification->userFrom->name }} ha messo mi piace alla tua foto</a>
+                                        </li>
+                                    @elseif($notification->type=='comment')
+                                        <li class="notification-row" style="white-space: normal;">
+                                            <a style="white-space: normal;" href="{{ url('locations/'.$notification->location->id) }}">L'utente {{ $notification->userFrom->name }} ha commentato una tua foto</a>
+                                        </li>
+                                    @endif
+                                @empty
+                                    <li class="notification-row">Non sono presenti notifiche</li>
+                                @endforelse
+                            </ul>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 @if(Auth::user()->avatar)
