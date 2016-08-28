@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'adriatik.dushica@gmail.com'
         ]);
 
-        for ($i = 0; $i < 200; $i++) {
+        for ($i = 0; $i < 1000; $i++) {
             $path = 'locations/' . $faker->md5 . '.jpg';
             \Storage::copy('demo/'.rand(1,5).'.jpg', $path);
 
