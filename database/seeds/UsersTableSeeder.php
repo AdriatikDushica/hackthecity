@@ -27,18 +27,23 @@ class UsersTableSeeder extends Seeder
             'email' => 'adriatik.dushica@gmail.com'
         ]);
 
-        for ($i = 0; $i < 1000; $i++) {
-            $path = 'locations/' . $faker->md5 . '.jpg';
-            \Storage::copy('demo/'.rand(1,5).'.jpg', $path);
+        for ($i = 0; $i < 250; $i++) {
 
-            $user->locations()->create([
-                'path' => $path,
-                'lat' => $faker->randomFloat(8, 46.655792, 47.721267),
-                'lng' => $faker->randomFloat(8, 6.480414, 10.342801),
-                'disabled' => $faker->boolean,
-                'description' => $faker->paragraph,
-                'type_id' => Type::all()->random()->id
-            ]);
+            $lat = $faker->randomFloat(8, 46.655792, 47.721267);
+            $lng = $faker->randomFloat(8, 6.480414, 10.342801);
+
+            for ($x = 0; $x < rand(0, 4); $x++) {
+                $path = 'locations/' . $faker->md5 . '.jpg';
+                \Storage::copy('demo/'.rand(1,5).'.jpg', $path);
+                $user->locations()->create([
+                    'path' => $path,
+                    'lat' => $lat,
+                    'lng' => $lng,
+                    'disabled' => $faker->boolean,
+                    'description' => $faker->paragraph,
+                    'type_id' => Type::all()->random()->id
+                ]);
+            }
         }
     }
 }
