@@ -38,7 +38,7 @@
                                         </a>
                                     @endif
                                 @endif
-                                <a href="https://maps.google.com?saddr=Current+Location&daddr={{ $location->lat }},{{ $location->lng }}" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="indicazioni stradali"><i class="fa fa-car" aria-hidden="true"></i></a>
+                                <a target="_blank" href="https://maps.google.com?saddr=Current+Location&daddr={{ $location->lat }},{{ $location->lng }}" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="indicazioni stradali"><i class="fa fa-car" aria-hidden="true"></i></a>
                             </div>
                         </div>
 
